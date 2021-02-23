@@ -1,0 +1,9 @@
+export const LOGIN            = 'LOGIN';
+export const LOGOUT           = 'LOGOUT';
+export const LOGIN_ERROR      = 'LOGIN_ERROR';
+export const REGISTER         = 'REGISTER';
+export const AUTH_SUCCESS     = 'AUTH_SUCCESS';
+export const FORGOT_PASSWORD  = 'FORGOT_PASSWORD';
+export const RESTORE_TOKEN    = 'RESTORE_TOKEN';
+export const EDIT_PROFILE     = 'EDIT_PROFILE';
+export const SOCIAL_LOGIN     = 'SOCIAL_LOGIN';
