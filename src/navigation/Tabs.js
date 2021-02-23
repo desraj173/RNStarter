@@ -1,33 +1,48 @@
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
+import React from 'react';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Image} from 'react-native';
+import {COLORS, IMAGES} from '../constants';
+import Home from './Stacks/Home';
+import Settings from './Stacks/Settings';
 
 const Tab = createBottomTabNavigator();
 
-export default function App() {
+function TabNavigator() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <Tab.Navigator
+      screenOptions={({route}) => ({
+        tabBarIcon: ({focused, color, size}) => {
+          let iconName;
+
+          let routeName = route.name.toLowerCase();
+
+          iconName = focused
+            ? IMAGES.Tabs[`${routeName}Focus`]
+            : IMAGES.Tabs[routeName];
+
+          // You can return any component that you like here!
+          return (
+            <Image
+              source={iconName}
+              style={{
+                tintColor: focused ? COLORS.primaryColor : 'grey',
+                width: 20,
+                height: 20,
+                resizeMode: 'contain',
+              }}
+              resizeMode={'contain'}
+            />
+          );
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: COLORS.secondaryColor,
+        inactiveTintColor: 'grey',
+      }}>
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Settings" component={Settings} />
+    </Tab.Navigator>
   );
 }
+
+export default TabNavigator;
